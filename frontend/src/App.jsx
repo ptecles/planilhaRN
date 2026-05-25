@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Baby, MapPin, Calendar, Thermometer } from 'lucide-react'
+import { Baby, MapPin, Calendar } from 'lucide-react'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
 
@@ -174,74 +174,43 @@ function App() {
           </div>
 
           {result && (
-            <div className="space-y-6">
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <div className="flex items-center mb-6">
-                  <Thermometer className="w-6 h-6 text-blue-500 mr-2" />
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Temperaturas
-                  </h2>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">Mínima</p>
-                    <p className="text-2xl font-bold text-blue-600">
-                      {result.temperaturas.minima}°C
-                    </p>
-                  </div>
-                  <div className="text-center p-4 bg-purple-50 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">Média</p>
-                    <p className="text-2xl font-bold text-purple-600">
-                      {result.temperaturas.media}°C
-                    </p>
-                  </div>
-                  <div className="text-center p-4 bg-pink-50 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">Máxima</p>
-                    <p className="text-2xl font-bold text-pink-600">
-                      {result.temperaturas.maxima}°C
-                    </p>
-                  </div>
-                </div>
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="flex items-center mb-6">
+                <Baby className="w-6 h-6 text-pink-500 mr-2" />
+                <h2 className="text-2xl font-bold text-gray-800">
+                  Enxoval Recomendado
+                </h2>
               </div>
-
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <div className="flex items-center mb-6">
-                  <Baby className="w-6 h-6 text-pink-500 mr-2" />
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Enxoval Recomendado
-                  </h2>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b-2 border-gray-200">
-                        <th className="text-left py-3 px-4 font-semibold text-gray-700">
-                          Item
-                        </th>
-                        <th className="text-center py-3 px-4 font-semibold text-gray-700">
-                          Quantidade
-                        </th>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-gray-200">
+                      <th className="text-left py-3 px-4 font-semibold text-gray-700">
+                        Item
+                      </th>
+                      <th className="text-center py-3 px-4 font-semibold text-gray-700">
+                        Quantidade
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {result.enxoval.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                      >
+                        <td className="py-4 px-4 text-gray-800">
+                          {item.item}
+                        </td>
+                        <td className="py-4 px-4 text-center">
+                          <span className="inline-block bg-pink-100 text-pink-700 font-semibold px-4 py-2 rounded-full">
+                            {item.quantidade}
+                          </span>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {result.enxoval.map((item, index) => (
-                        <tr
-                          key={index}
-                          className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                        >
-                          <td className="py-4 px-4 text-gray-800">
-                            {item.item}
-                          </td>
-                          <td className="py-4 px-4 text-center">
-                            <span className="inline-block bg-pink-100 text-pink-700 font-semibold px-4 py-2 rounded-full">
-                              {item.quantidade}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           )}
